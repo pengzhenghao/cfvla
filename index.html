@@ -11,10 +11,8 @@
   <meta property="og:title" content="CF-VLA: Counterfactual VLA">
   <meta property="og:description" content="Self-Reflective Vision-Language-Action Model with Adaptive Reasoning. CVPR 2026.">
   <meta property="og:type" content="website">
-  <!-- TODO: Update with actual URL -->
-  <meta property="og:url" content="https://YOUR_USERNAME.github.io/CF-VLA/">
-  <!-- TODO: Add a teaser image for social sharing -->
-  <!-- <meta property="og:image" content="static/images/teaser.png"> -->
+  <meta property="og:url" content="https://pengzhenghao.github.io/cfvla">
+  <meta property="og:image" content="https://pengzhenghao.github.io/cfvla/static/images/teaser.png">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,6 +89,10 @@
     }
     .authors .author-name {
       font-weight: 600;
+    }
+    .authors .no-link {
+      font-weight: 600;
+      color: #333;
     }
     .authors sup {
       font-size: 11px;
@@ -224,30 +226,56 @@
       color: #666;
     }
 
-    /* ===== Video ===== */
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 8px;
-      margin: 20px 0;
-      background: #000;
+    /* ===== Results Table ===== */
+    .results-table-wrapper {
+      overflow-x: auto;
+      margin: 30px 0;
     }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 800px;
     }
-    .video-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      color: #999;
-      font-size: 18px;
+    .results-table th {
+      background: #f8f9fa;
+      font-weight: 700;
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 2px solid #ddd;
+      white-space: nowrap;
+    }
+    .results-table th:first-child {
+      text-align: left;
+    }
+    .results-table td {
+      padding: 8px 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    .results-table td:first-child {
+      text-align: left;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+    .results-table tr.section-sep td {
+      border-top: 2px solid #ccc;
+    }
+    .results-table .best {
+      font-weight: 700;
+      color: #76B900;
+    }
+    .results-table .model-hl td:first-child {
+      color: #76B900;
+      font-weight: 700;
+    }
+    .results-table caption {
+      caption-side: bottom;
+      text-align: left;
+      font-size: 13px;
+      color: #888;
+      padding-top: 10px;
+      line-height: 1.5;
     }
 
     /* ===== Qualitative ===== */
@@ -359,21 +387,20 @@
     <h1>Counterfactual VLA: Self-Reflective<br>Vision-Language-Action Model<br>with Adaptive Reasoning</h1>
 
     <div class="authors">
-      <!-- TODO: Update author homepage links -->
       <a href="https://pengzhenghao.github.io" class="author-name">Zhenghao Peng</a><sup>1,2</sup>*&nbsp;&nbsp;
-      <a href="#" class="author-name">Wenhao Ding</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Yurong You</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Yuxiao Chen</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Wenjie Luo</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Thomas Tian</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Yulong Cao</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Apoorva Sharma</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Danfei Xu</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Boris Ivanovic</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Boyi Li</a><sup>1</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Bolei Zhou</a><sup>2</sup>&nbsp;&nbsp;
-      <a href="#" class="author-name">Yan Wang</a><sup>1</sup>&dagger;&nbsp;&nbsp;
-      <a href="#" class="author-name">Marco Pavone</a><sup>1,3</sup>&dagger;
+      <a href="https://wenhao.pub/" class="author-name">Wenhao Ding</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="http://www.yurongyou.com/" class="author-name">Yurong You</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://research.nvidia.com/person/yuxiao-chen" class="author-name">Yuxiao Chen</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://research.nvidia.com/person/wenjie-luo" class="author-name">Wenjie Luo</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://thomasrantian.github.io/" class="author-name">Thomas Tian</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://kikacaty.github.io/" class="author-name">Yulong Cao</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://research.nvidia.com/person/apoorva-sharma" class="author-name">Apoorva Sharma</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://faculty.cc.gatech.edu/~danfei/" class="author-name">Danfei Xu</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://www.borisivanovic.com/" class="author-name">Boris Ivanovic</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://sites.google.com/site/boyilics/" class="author-name">Boyi Li</a><sup>1</sup>&nbsp;&nbsp;
+      <a href="https://boleizhou.github.io/" class="author-name">Bolei Zhou</a><sup>2</sup>&nbsp;&nbsp;
+      <a href="https://yanwang.org/" class="author-name">Yan Wang</a><sup>1</sup>&dagger;&nbsp;&nbsp;
+      <a href="https://web.stanford.edu/~pavone/" class="author-name">Marco Pavone</a><sup>1,3</sup>&dagger;
     </div>
 
     <div class="affiliations">
@@ -384,25 +411,18 @@
     <div class="equal-advising">* Work done during an internship at NVIDIA. &dagger; Equal advising.</div>
 
     <div class="links">
-      <!-- TODO: Update these links when available -->
-      <a href="#" title="Paper PDF"><i class="fas fa-file-pdf"></i> Paper</a>
-      <a href="#" title="arXiv"><i class="ai ai-arxiv"></i> arXiv</a>
-      <a href="#" title="Code"><i class="fab fa-github"></i> Code</a>
-      <a href="#" title="Video"><i class="fas fa-video"></i> Video</a>
-      <!-- <a href="#" title="Dataset"><i class="fas fa-database"></i> Data</a> -->
+      <a href="https://arxiv.org/pdf/2512.24426" title="Paper PDF"><i class="fas fa-file-pdf"></i> Paper</a>
+      <a href="https://arxiv.org/abs/2512.24426" title="arXiv"><i class="ai ai-arxiv"></i> arXiv</a>
     </div>
   </div>
 </section>
 
-<!-- ==================== TEASER ==================== -->
+<!-- ==================== TEASER (split into two figures) ==================== -->
 <section class="teaser">
   <div class="container">
-    <!-- TODO: Replace with actual teaser image -->
-    <img src="static/images/teaser.png" alt="CF-VLA teaser figure showing adaptive reasoning behavior">
+    <img src="static/images/teaser2.png" alt="CF-VLA self-reflection example: the model reflects on its own action plan and corrects it before generating the final trajectory.">
     <div class="caption">
-      <strong>Counterfactual Vision-Language-Action (CF-VLA) Model.</strong>
-      Top: CF-VLA conducts reasoning adaptively &mdash; the model engages in reasoning more frequently and achieves more significant performance gains in complex scenarios with higher trajectory errors.
-      Bottom: CF-VLA reflects on its own action plan and corrects it before generating the final trajectory.
+      <strong>Counterfactual VLA (CF-VLA)</strong> reflects on its own action plan and corrects it before generating the final trajectory. In this example, the initial meta-actions suggest accelerating toward a roundabout while a pedestrian is crossing. Through counterfactual reasoning, the model identifies the collision risk and revises the plan to decelerate and wait.
     </div>
   </div>
 </section>
@@ -421,45 +441,6 @@
 
 <hr class="sep">
 
-<!-- ==================== VIDEO ==================== -->
-<section id="video">
-  <div class="container narrow">
-    <h2 class="section-title">Video</h2>
-    <div class="video-wrapper">
-      <!-- TODO: Replace with actual YouTube embed -->
-      <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
-      <div class="video-placeholder">
-        <span><i class="fas fa-play-circle" style="font-size:48px; margin-right:12px;"></i> Video coming soon</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="sep">
-
-<!-- ==================== KEY RESULTS ==================== -->
-<section id="results">
-  <div class="container">
-    <h2 class="section-title">Key Results</h2>
-    <div class="results-grid">
-      <div class="stat-card">
-        <div class="number green">17.6%</div>
-        <div class="label">Lower Trajectory Error (minADE)</div>
-      </div>
-      <div class="stat-card">
-        <div class="number red">20.5%</div>
-        <div class="label">Fewer Collisions</div>
-      </div>
-      <div class="stat-card">
-        <div class="number blue">Adaptive</div>
-        <div class="label">Thinks harder on difficult scenes,<br>saves compute on easy ones</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="sep">
-
 <!-- ==================== METHOD ==================== -->
 <section id="method">
   <div class="container">
@@ -473,7 +454,6 @@
 
     <!-- Framework Figure -->
     <div class="figure-block">
-      <!-- TODO: Replace with actual framework figure -->
       <img src="static/images/framework.png" alt="CF-VLA framework overview" style="max-width:850px;">
       <div class="caption">
         <strong>The framework of CF-VLA.</strong> A base VLA is fine-tuned on a counterfactual reasoning dataset generated by a rollout&ndash;filter&ndash;label pipeline. The resulting CF-VLA supports both direct inference and self-reflective inference, in which counterfactual reasoning edits meta-actions before trajectory generation.
@@ -499,7 +479,6 @@
 
     <!-- Data Pipeline Figure -->
     <div class="figure-block" style="margin-top:30px;">
-      <!-- TODO: Replace with actual data pipeline figure -->
       <img src="static/images/data_pipeline.png" alt="Data pipeline: adaptive reasoning, data generation, and data filtering">
       <div class="caption">
         <strong>(A) Adaptive Reasoning</strong> can be achieved by training on a mixture of data with a unified instruction prompt.
@@ -517,7 +496,6 @@
   <div class="container qualitative">
     <h2 class="section-title">Qualitative Results</h2>
 
-    <!-- TODO: Replace with actual qualitative results figure -->
     <div class="figure-block">
       <img src="static/images/qualitative.png" alt="Qualitative results showing CF-VLA self-reflection in three scenarios">
       <div class="caption">
@@ -532,13 +510,47 @@
 
 <hr class="sep">
 
+<!-- ==================== KEY RESULTS ==================== -->
+<section id="results">
+  <div class="container">
+    <h2 class="section-title">Key Results</h2>
+    <div class="results-grid">
+      <div class="stat-card">
+        <div class="number green">17.6%</div>
+        <div class="label">Lower Trajectory Error (minADE)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number red">20.5%</div>
+        <div class="label">Fewer Collisions</div>
+      </div>
+      <div class="stat-card">
+        <div class="number blue">Adaptive</div>
+        <div class="label">Thinks harder on difficult scenes,<br>saves compute on easy ones</div>
+      </div>
+    </div>
+
+    <!-- Adaptive Reasoning Figure -->
+     
+    <div class="figure-block" style="margin-top:30px;">
+      <h3 style="font-size:1.2em; margin-bottom:16px; color:#1a1a2e;">Adaptive Reasoning</h3>
+      <img src="static/images/adaptive.png" alt="CF-VLA adaptive reasoning: think rate and task improvement across scenario difficulty" style="max-width:700px;">
+      <div class="caption">
+        CF-VLA thinks more frequently in hard scenarios (lane changes, merging, turning maneuvers) and achieves larger error reductions where reasoning matters most. Simple scenarios like vehicle following rarely trigger counterfactual reasoning.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+
 <!-- ==================== BIBTEX ==================== -->
 <section id="bibtex">
   <div class="container narrow">
     <h2 class="section-title">BibTeX</h2>
     <div class="bibtex-box">
       <button class="copy-btn" onclick="copyBibtex()"><i class="fas fa-copy"></i> Copy</button>
-      <pre><code id="bibtex-code">@inproceedings{peng2026cfvla,
+      <pre><code id="bibtex-code">@inproceedings{peng2026counterfactual,
   title     = {Counterfactual VLA: Self-Reflective Vision-Language-Action
                Model with Adaptive Reasoning},
   author    = {Peng, Zhenghao and Ding, Wenhao and You, Yurong and
